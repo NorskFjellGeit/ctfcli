@@ -6,7 +6,7 @@ def strings(filename, min_length=4):
     Python implementation of strings
     https://stackoverflow.com/a/17197027
     """
-    with open(filename, errors="ignore") as f:
+    with open(filename, errors="ignore", encoding="utf-8") as f:
         result = ""
 
         for c in f.read():

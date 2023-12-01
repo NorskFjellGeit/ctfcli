@@ -53,5 +53,5 @@ class API(Session):
         if kwargs.get("headers", None) is None:
             kwargs["headers"] = {}
 
-        kwargs["headers"]["Content-Type"] = "application/json"
+        kwargs["headers"]["Content-Type"] = "application/json; charset=utf-8"
         return super(API, self).request(method, url, *args, **kwargs)

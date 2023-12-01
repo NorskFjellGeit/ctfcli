@@ -83,7 +83,7 @@ class Page:
         if not self.page_path.exists():
             return
 
-        with open(self.page_path, "r") as page_file:
+        with open(self.page_path, "r", encoding="utf-8") as page_file:
             page_data = frontmatter.load(page_file)
 
             return {**page_data.metadata, "content": page_data.content}
@@ -149,7 +149,7 @@ class Page:
 
             click.secho(f"Overwriting page file '{self.page_file_path}'", fg="yellow")
 
-        with open(page_path, "wb+") as page_file:
+        with open(page_path, "wb+", encoding="utf-8") as page_file:
             frontmatter.dump(self.as_frontmatter_post(), page_file)
 
     def push(self):

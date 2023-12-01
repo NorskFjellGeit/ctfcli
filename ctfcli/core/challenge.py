@@ -119,7 +119,7 @@ class Challenge(dict):
 
         self.challenge_directory = self.challenge_file_path.parent
 
-        with open(self.challenge_file_path) as challenge_file:
+        with open(self.challenge_file_path, encoding="utf-8") as challenge_file:
             try:
                 challenge_definition = yaml.safe_load(challenge_file.read())
             except yaml.YAMLError as e:
@@ -273,7 +273,7 @@ class Challenge(dict):
     def _create_files(self):
         new_files = []
         for challenge_file in self["files"]:
-            new_files.append(("file", open(self.challenge_directory / challenge_file, mode="rb")))
+            new_files.append(("file", open(self.challenge_directory / challenge_file, mode="rb", encoding="utf-8")))
 
         files_payload = {"challenge_id": self.challenge_id, "type": "challenge"}
         # Specifically use data= here to send multipart/form-data
@@ -515,7 +515,7 @@ class Challenge(dict):
                 issues["dockerfile"].append("Dockerfile specified in 'image' field but no Dockerfile found")
 
             if has_dockerfile:
-                with open(dockerfile_path, "r") as dockerfile:
+                with open(dockerfile_path, "r", encoding="utf-8") as dockerfile:
                     dockerfile_source = dockerfile.read()
 
                     if "EXPOSE" not in dockerfile_source:
@@ -773,7 +773,7 @@ class Challenge(dict):
             pattern = "|".join(r"^" + re.escape(key) + r":" for key in self.keys_with_newline)
             pretty_challenge_yml = re.sub(pattern, r"\n\g<0>", challenge_yml, flags=re.MULTILINE)
 
-            with open(self.challenge_file_path, "w") as challenge_file:
+            with open(self.challenge_file_path, "w", encoding="utf-8") as challenge_file:
                 challenge_file.write(pretty_challenge_yml)
 
         except Exception as e:

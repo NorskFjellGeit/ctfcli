@@ -8,7 +8,7 @@ def encrypt(string):
 
 
 def main():
-    with open("src/flag.txt") as f:
+    with open("src/flag.txt", encoding="utf-8") as f:
         print(encrypt(f.read()))
 
 

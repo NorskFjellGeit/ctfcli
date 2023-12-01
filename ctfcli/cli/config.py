@@ -45,7 +45,7 @@ class ConfigCommand:
             click.echo(config_json)
             return 0
 
-        with open(config.get_config_path(), "r") as config_file:
+        with open(config.get_config_path(), "r", encoding="utf-8") as config_file:
             config_ini = config_file.read()
 
             if color:

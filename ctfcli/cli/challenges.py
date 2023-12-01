@@ -98,7 +98,7 @@ class ChallengeCommand:
         if not challenge_instance:
             return 1
 
-        with open(challenge_instance.challenge_file_path, "r") as challenge_yml_file:
+        with open(challenge_instance.challenge_file_path, "r", encoding="utf-8") as challenge_yml_file:
             challenge_yml = challenge_yml_file.read()
 
             if color:
@@ -170,7 +170,7 @@ class ChallengeCommand:
                 )
                 return 1
 
-            with open(config.config_path, "w+") as config_file:
+            with open(config.config_path, "w+", encoding="utf-8") as config_file:
                 config.write(config_file)
 
             log.debug(f"call(['git', 'add', '.ctf/config'], cwd='{project_path}')")
@@ -191,7 +191,7 @@ class ChallengeCommand:
         # otherwise - we're working with a folder path
         if Path(repo).exists():
             config["challenges"][repo] = repo
-            with open(config.config_path, "w+") as f:
+            with open(config.config_path, "w+", encoding="utf-8") as f:
                 config.write(f)
 
             return 0

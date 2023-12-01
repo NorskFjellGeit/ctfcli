@@ -66,7 +66,7 @@ class CTFCLI:
         config = configparser.ConfigParser()
         config["config"] = {"url": ctf_url, "access_token": ctf_token}
         config["challenges"] = {}
-        with (project_path / ".ctf" / "config").open(mode="a+") as config_file:
+        with (project_path / ".ctf" / "config").open(mode="a+", encoding="utf-8") as config_file:
             config.write(config_file)
 
         # if git init is to be skipped we can return
